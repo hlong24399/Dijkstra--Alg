@@ -79,12 +79,15 @@ public:
 	void print_route(vector<int>& prev, int i);		//Recursion for the previous vertices trace. ( work with Graph::ShortestPath(int,int) only)
 	int minVertex(Dijkstra_Utility*);				//To find the minimum distance to the current vertex ( work with Graph::ShortestPath(int,int) only)
 	void ShortestPath(int s, int e);				//Dijsktra Algorithm
+	void resetShortestPath();
 	
 	
 	void DrawselectedPath(vector<int> v);			//Draw the path.
 	vector<sf::CircleShape>getDrawVertices();		//Return the SFML 
 	sf::VertexArray getDrawEdges();					//	drawing shapes.
 	
-    
+	void options_list();
+	void newVertex();
+	void newEdge();
     
 };
