@@ -1,4 +1,4 @@
-# Dijkstra-s-Alg
+# Dijkstra-s-Alg - Build.For.Fun
 
 
 # This program will be able to do 3 things:
