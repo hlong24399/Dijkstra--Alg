@@ -34,6 +34,8 @@ Graph::Graph() {
 	//Set up edges
 	setEdge();
 	setDrawEdges();
+
+	//Set up the adjacency matrix.
 	setMatrix();
 }
 
@@ -162,6 +164,8 @@ int Graph::minVertex(Dijkstra_Utility* vd)
 }
 void Graph::ShortestPath(int s, int e) //s is starting vertex. (s = 0)
 {
+
+	resetShortestPath();
 	vector<int>pre_v(v_amounts, -1);
 	Dijkstra_Utility* d = new Dijkstra_Utility[v_amounts]; //Data of Vertex
 	d[s].dist = 0; //Inital Node distance is known as 0.
@@ -177,15 +181,19 @@ void Graph::ShortestPath(int s, int e) //s is starting vertex. (s = 0)
 				//cout << " Just update the distance of " << t << endl;
 				//cout << " Update the connected edge " << c << "--" << t << " to be " << d[t].dist << endl;
 				pre_v[t] = c;
-				for (auto i : pre_v) cout << i << " ***** ";
-				cout << endl;
 			}
 		}
 	}
 	/*for (int a = 0; a < v_amounts; a++) {
 		cout << d[a].dist << endl;
 	}*/ //Uncm this to see list of distance.
-	cout << " Path from vertex 0 to vertex " << e << " has minimum cost of " <<
+	
+	//If there is no edge connecting between the 2 vertices, it's distance will remain INF, which is less than 0
+	if (d[e].dist < 0 || d[e].dist > 10000) {
+		cout << " There is no way to connect these two. "; 
+		return;
+	}
+	cout << " Path from vertex " << s << " to vertex " << e << " has minimum cost of " <<
 		d[e].dist << " Has the minimum route is ";
 
 	print_route(pre_v, e);	//Set up vector Graph::path<int>
@@ -193,7 +201,14 @@ void Graph::ShortestPath(int s, int e) //s is starting vertex. (s = 0)
 	for (auto i : path) cout << i << "......";
 	cout << endl;
 	DrawselectedPath(path);
-	cout << ". \n That is it, After several hours. Man!" << endl;
+}
+
+void Graph::resetShortestPath()
+{
+	path.erase(path.begin(), path.end());
+	for (int i = 0; i < de.getVertexCount(); i++) {
+		de[i].color = sf::Color::Black;
+	}
 }
 
 sf::VertexArray Graph::getDrawEdges()
@@ -205,3 +220,85 @@ vector<sf::CircleShape> Graph::getDrawVertices()
 {
 	return d_vertices;
 }
+
+//This is the menu of obtions for the current graph.
+void Graph::options_list()
+{
+	cout << " \n\n\n";
+	cout << "1 is add a vertex.";
+	cout << "\n2 is add an edge.";
+	cout << "\n3 is run Dijsktra to find shortest path from source to end vertex.";
+	cout << "\nYou choice : ";
+	int c;
+	cin >> c;
+	while (c != 1 && c != 2 && c != 3) {
+		cout << " That's not one of those options, please try again :";
+		cin >> c;
+	}
+	switch (c) {
+	
+	//Add new vertex
+	case 1:
+		newVertex();
+		break;
+	
+	//Add new edge
+	case 2:
+		newEdge();
+		break;
+	
+	//Run Dijkstra
+	case 3:
+		int a, b;
+		cout << " Enter start and end vertex order: ";
+		cin >> a >> b;
+		ShortestPath(a, b);
+		break;
+	default:
+		break;
+	}
+}
+
+void Graph::newVertex()
+{
+	//Add the new vertex into vector<Vertex>vertices and also add the new sf::CircleShape to draw.
+	Vertex temp;
+	cout << " Enter your vertices info by this order:\n ";
+	cout << " (order)  (x coordinate)  (y coordinate) ";
+	cin >> temp.order >> temp.cor_x >> temp.cor_y;
+	vertices.push_back(temp);
+	
+	//Update value of v_amount since it's added one more now.
+	v_amounts = vertices.size();
+	sf::CircleShape temp_circle;
+	temp_circle.setPosition(temp.cor_x, temp.cor_y);
+	temp_circle.setFillColor(sf::Color::Black);
+	temp_circle.setRadius(7);
+	d_vertices.push_back(temp_circle);
+	setMatrix(); //rebuild the matrix since the vertices structure has changed.
+}
+
+void Graph::newEdge()
+{
+	int o_v1, o_v2, w;			//Order of vertex 1 and 2, and the edge's weight
+	cout << " Enter the 2 vertices it connects: ";
+	cin >> o_v1 >> o_v2;
+	cout << " Enter its weight : ";
+	cin >> w;
+	edges.push_back(addEdge(w, make_pair(vertices[o_v1], vertices[o_v2])));
+	e_amounts = edges.size();		//Update e_amount since now there is one more edge.
+	
+	//Update the sf::VertexArray for drawing.
+	sf::Vertex v1, v2;
+	v1.position = sf::Vector2f(vertices[o_v1].cor_x + 7.f, vertices[o_v1].cor_y + 7.f);
+	v1.color = sf::Color::Black;
+	v2.position = sf::Vector2f(vertices[o_v2].cor_x + 7.f, vertices[o_v2].cor_y + 7.f);
+	v2.color = sf::Color::Black;
+	de.append(v1);
+	de.append(v2);
+	setMatrix(); //rebuild the matrix since the edge structure has changed.
+
+
+}
+
+
