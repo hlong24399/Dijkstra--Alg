@@ -8,13 +8,17 @@
 
 #include "Graph.hpp"
 
+//Set the termination condition for the program to be false.
+bool Graph::sentinel = false;
+
 Graph::Graph() {
+	
 	ifstream in;
 	string name;
 	cout << " Enter file name: ";
 	//getline(cin,name);
 	//in.open(name);
-	in.open("cor2.txt");
+	in.open("cor.txt");
 	while (1) {
 		if (in.fail()) {
 			cout << " Failed to open file " << endl;
@@ -180,7 +184,7 @@ void Graph::ShortestPath(int s, int e) //s is starting vertex. (s = 0)
 				d[t].dist = d[c].dist + matrix[c].row[t];
 				//cout << " Just update the distance of " << t << endl;
 				//cout << " Update the connected edge " << c << "--" << t << " to be " << d[t].dist << endl;
-				pre_v[t] = c;
+				pre_v[t] = c;		//Previous Vertex of t.
 			}
 		}
 	}
@@ -225,13 +229,15 @@ vector<sf::CircleShape> Graph::getDrawVertices()
 void Graph::options_list()
 {
 	cout << " \n\n\n";
+	cout << "Press\n";
 	cout << "1 is add a vertex.";
 	cout << "\n2 is add an edge.";
 	cout << "\n3 is run Dijsktra to find shortest path from source to end vertex.";
+	cout << "\n4 to end this thing.";
 	cout << "\nYou choice : ";
 	int c;
 	cin >> c;
-	while (c != 1 && c != 2 && c != 3) {
+	while ( c <  1 || c > 4) {
 		cout << " That's not one of those options, please try again :";
 		cin >> c;
 	}
@@ -254,6 +260,9 @@ void Graph::options_list()
 		cin >> a >> b;
 		ShortestPath(a, b);
 		break;
+	case 4:
+		sentinel = true;  //Terminate if this one is true.
+		break;
 	default:
 		break;
 	}
@@ -263,6 +272,7 @@ void Graph::newVertex()
 {
 	//Add the new vertex into vector<Vertex>vertices and also add the new sf::CircleShape to draw.
 	Vertex temp;
+	cout << " The current newest vertex has order " << vertices.size()-1 << endl;
 	cout << " Enter your vertices info by this order:\n ";
 	cout << " (order)  (x coordinate)  (y coordinate) ";
 	cin >> temp.order >> temp.cor_x >> temp.cor_y;
