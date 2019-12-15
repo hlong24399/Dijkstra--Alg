@@ -8,10 +8,11 @@ using namespace std;
 
 
 int main() {
+	
 	sf::ContextSettings sets;
 	sets.antialiasingLevel = 8; 
-	sf::RenderWindow win(sf::VideoMode(800, 600), "Graph", sf::Style::Default, sets);
-	win.setPosition(sf::Vector2i(300, 300));
+	sf::RenderWindow win(sf::VideoMode(1500, 1150), "Graph", sf::Style::Default, sets);
+	win.setPosition(sf::Vector2i(100, 100));
 	win.setFramerateLimit(60);
 	Graph g;
 	while (win.isOpen()) {
@@ -25,8 +26,9 @@ int main() {
 		win.draw(g.getDrawEdges());
 		win.display();
 		g.options_list(); //Ask for the selection.
+		if (Graph::sentinel) break;
 	}
-	cout << " Done ";
+	cout << " Program is ended. " << endl;
 
 
 
