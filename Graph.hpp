@@ -49,7 +49,8 @@ struct Dijkstra_Utility {
 
 class Graph {
 public:
-    //These are to store
+	static bool sentinel;
+	//These are to store
 	vector<Vertex>vertices;
     vector<Edge>edges;
 	
@@ -86,8 +87,8 @@ public:
 	vector<sf::CircleShape>getDrawVertices();		//Return the SFML 
 	sf::VertexArray getDrawEdges();					//	drawing shapes.
 	
-	void options_list();
-	void newVertex();
-	void newEdge();
+	void options_list();							//Show the list of option
+	void newVertex();								//add new vertex
+	void newEdge();									//add new edge
     
 };
