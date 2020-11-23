@@ -8,9 +8,9 @@ using namespace std;
 
 
 int main() {
-	
+
 	sf::ContextSettings sets;
-	sets.antialiasingLevel = 8; 
+	sets.antialiasingLevel = 8;
 	sf::RenderWindow win(sf::VideoMode(1500, 1150), "Graph", sf::Style::Default, sets);
 	win.setPosition(sf::Vector2i(100, 100));
 	win.setFramerateLimit(60);
@@ -20,7 +20,7 @@ int main() {
 		while (win.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) win.close();
 		}
-		
+
 		win.clear(sf::Color::White);
 		for (auto i : g.getDrawVertices()) win.draw(i);
 		win.draw(g.getDrawEdges());

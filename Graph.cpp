@@ -12,7 +12,7 @@
 bool Graph::sentinel = false;
 
 Graph::Graph() {
-	
+
 	ifstream in;
 	string name;
 	cout << " Enter file name: ";
@@ -66,6 +66,16 @@ void Graph::setEdge()
 	edges.push_back(addEdge(7, make_pair(vertices[0], vertices[3])));
 	edges.push_back(addEdge(1, make_pair(vertices[1], vertices[3])));
 	edges.push_back(addEdge(9, make_pair(vertices[3], vertices[4])));
+	edges.push_back(addEdge(7, make_pair(vertices[5], vertices[6])));
+	edges.push_back(addEdge(9, make_pair(vertices[5], vertices[7])));
+	edges.push_back(addEdge(7, make_pair(vertices[2], vertices[1])));
+	edges.push_back(addEdge(2, make_pair(vertices[4], vertices[3])));
+	edges.push_back(addEdge(13, make_pair(vertices[1], vertices[6])));
+	edges.push_back(addEdge(8, make_pair(vertices[8], vertices[1])));
+	edges.push_back(addEdge(3, make_pair(vertices[6], vertices[2])));
+	edges.push_back(addEdge(6, make_pair(vertices[7], vertices[3])));
+	edges.push_back(addEdge(9, make_pair(vertices[8], vertices[7])));
+
 	e_amounts = edges.size();
 }
 
@@ -191,10 +201,10 @@ void Graph::ShortestPath(int s, int e) //s is starting vertex. (s = 0)
 	/*for (int a = 0; a < v_amounts; a++) {
 		cout << d[a].dist << endl;
 	}*/ //Uncm this to see list of distance.
-	
+
 	//If there is no edge connecting between the 2 vertices, it's distance will remain INF, which is less than 0
 	if (d[e].dist < 0 || d[e].dist > 10000) {
-		cout << " There is no way to connect these two. "; 
+		cout << " There is no way to connect these two. ";
 		return;
 	}
 	cout << " Path from vertex " << s << " to vertex " << e << " has minimum cost of " <<
@@ -242,17 +252,17 @@ void Graph::options_list()
 		cin >> c;
 	}
 	switch (c) {
-	
+
 	//Add new vertex
 	case 1:
 		newVertex();
 		break;
-	
+
 	//Add new edge
 	case 2:
 		newEdge();
 		break;
-	
+
 	//Run Dijkstra
 	case 3:
 		int a, b;
@@ -277,7 +287,7 @@ void Graph::newVertex()
 	cout << " (order)  (x coordinate)  (y coordinate) ";
 	cin >> temp.order >> temp.cor_x >> temp.cor_y;
 	vertices.push_back(temp);
-	
+
 	//Update value of v_amount since it's added one more now.
 	v_amounts = vertices.size();
 	sf::CircleShape temp_circle;
@@ -297,7 +307,7 @@ void Graph::newEdge()
 	cin >> w;
 	edges.push_back(addEdge(w, make_pair(vertices[o_v1], vertices[o_v2])));
 	e_amounts = edges.size();		//Update e_amount since now there is one more edge.
-	
+
 	//Update the sf::VertexArray for drawing.
 	sf::Vertex v1, v2;
 	v1.position = sf::Vector2f(vertices[o_v1].cor_x + 7.f, vertices[o_v1].cor_y + 7.f);
@@ -310,5 +320,3 @@ void Graph::newEdge()
 
 
 }
-
-
