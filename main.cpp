@@ -24,6 +24,8 @@ int main() {
 		win.clear(sf::Color::White);
 		for (auto i : g.getDrawVertices()) win.draw(i);
 		win.draw(g.getDrawEdges());
+		for (auto i : g.getDrawTexts_v()) win.draw(i);
+		for (auto i : g.getDrawTexts_e()) win.draw(i);
 		win.display();
 		g.options_list(); //Ask for the selection.
 		if (Graph::sentinel) break;

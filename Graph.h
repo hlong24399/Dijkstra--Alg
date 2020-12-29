@@ -19,9 +19,9 @@ using namespace std;
 
 //To represent a Vertex
 struct Vertex {
-    int order;
+  int order;
 	float cor_x;
-    float cor_y;
+  float cor_y;
 
 };
 
@@ -53,7 +53,7 @@ public:
 	static bool sentinel;
 	//These are to store
 	vector<Vertex>vertices;
-    vector<Edge>edges;
+  vector<Edge>edges;
 
 	//These are to save number of vertices and edges counted from input
 	int v_amounts;
@@ -69,6 +69,13 @@ public:
 	//Save the shortest path
 	vector<int>path;
 
+  //Save the draw text
+  // sf::Text text;
+  vector<sf::Text> v_texts;
+  vector<sf::Text> e_texts;
+  sf::Font font;
+
+
 public:
 	Graph(); //Initialization
 	Edge addEdge(int, pair<Vertex,Vertex>);
@@ -76,7 +83,8 @@ public:
 	void setDrawVertices();	//Set up the SFML vertices
 	void setMatrix();		//Adjacent matrix builder
 	void setDrawEdges();	//Set up the SFML edges
-
+  void setDrawTexts_v();  //Set up texts for vertices
+  void setDrawTexts_e();  //Se up texts for edges
 
 	void print_route(vector<int>& prev, int i);		//Recursion for the previous vertices trace. ( work with Graph::ShortestPath(int,int) only)
 	int minVertex(Dijkstra_Utility*);				//To find the minimum distance to the current vertex ( work with Graph::ShortestPath(int,int) only)
@@ -87,6 +95,8 @@ public:
 	void DrawselectedPath(vector<int> v);			//Draw the path.
 	vector<sf::CircleShape>getDrawVertices();		//Return the SFML
 	sf::VertexArray getDrawEdges();					//	drawing shapes.
+  vector<sf::Text> getDrawTexts_v();
+  vector<sf::Text> getDrawTexts_e();
 
 	void options_list();							//Show the list of option
 	void newVertex();								//add new vertex

@@ -13,11 +13,11 @@ bool Graph::sentinel = false;
 
 Graph::Graph() {
 
+
+
 	ifstream in;
 	string name;
 	cout << " Enter file name: ";
-	//getline(cin,name);
-	//in.open(name);
 	in.open("cor.txt");
 	if (in.fail()) {
 		cout << " Failed to open file " << endl;
@@ -29,9 +29,18 @@ Graph::Graph() {
 	cout << endl;
 	setDrawVertices();
 
+	//Set up font
+	font.loadFromFile("opensans.ttf");
+
+	//Set up texts
+	setDrawTexts_v();
+
 	//Set up edges
 	setEdge();
 	setDrawEdges();
+
+	//Set up texts
+	setDrawTexts_e();
 
 	//Set up the adjacency matrix.
 	setMatrix();
@@ -49,7 +58,6 @@ Edge Graph::addEdge(int weight, pair<Vertex, Vertex> n_edge)
 
 void Graph::setEdge()
 {
-	//This part needs to be updated if we update the Vertices List from the file//
 	ifstream in;
 	in.open("edge.txt");
 	if (in.fail()) {
@@ -91,6 +99,55 @@ void Graph::setDrawVertices()
 		d_vertices[i].setRadius(7);
 	}
 
+}
+
+void Graph::setDrawTexts_v()
+{
+	// select the font
+	v_texts.resize(v_amounts);
+	for ( int i = 0; i < v_amounts; i++ ) {
+
+		char c = vertices[i].order + '0';
+		cout << c;
+		v_texts[i].setFont(font);
+		v_texts[i].setString(c);
+		v_texts[i].setCharacterSize(24); // in pixels, not points!
+		v_texts[i].setFillColor(sf::Color::Magenta);
+		v_texts[i].setStyle(sf::Text::Bold);
+		v_texts[i].setPosition(vertices[i].cor_x-13, vertices[i].cor_y-13);
+
+	}
+
+}
+
+void Graph::setDrawTexts_e()
+{
+	e_texts.resize(e_amounts);
+	for ( int i = 0; i < e_amounts; i++)
+	{
+		// de[2 * i].position
+		// de[2 * i + 1].position
+
+		e_texts[i].setFont(font);
+		char c = edges[i].w + '0';
+		e_texts[i].setString(c);
+		e_texts[i].setCharacterSize(18); // in pixels, not points!
+		e_texts[i].setFillColor(sf::Color::Red);
+		e_texts[i].setStyle(sf::Text::Bold);
+		e_texts[i].setPosition((de[2*i].position.x+de[2*i+1].position.x+7.f)/2, (de[2*i].position.y+de[2*i+1].position.y+7.f)/2);
+
+	}
+}
+
+vector<sf::Text> Graph::getDrawTexts_e()
+{
+	return e_texts;
+}
+
+
+vector<sf::Text> Graph::getDrawTexts_v()
+{
+	return v_texts;
 }
 
 void Graph::setMatrix()

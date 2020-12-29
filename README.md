@@ -6,6 +6,12 @@
   2.Add new edge(s).                                                                                                                       
   3.Run Dijkstra Algorithm from the selected source to selected destination.
 
+# cor.txt format:
+index | x-cor | y-cor
+
+# edge.txt format:
+start | end | weight
+
 #To run this project:
 1. Install SFML
 sudo apt-get install libsfml-dev
@@ -17,6 +23,7 @@ g++ -c main.cpp -o main.o
 g++ main.o Graph.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 
 4. Run the executable file
-./sfml-app
 
-g++ -c main.cpp -o main.o; g++ main.o Graph.o -o sfml.app -lsfml-graphics -lsfml-window -lsfml-system; ./sfml-app
+--> g++ -c main.cpp -o main.o; g++ -c Graph.cpp -o Graph.o; g++ main.o Graph.o -o sfml.app -lsfml-graphics -lsfml-window -lsfml-system;
+
+--> ./sfml-app
