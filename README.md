@@ -13,16 +13,19 @@ index | x-cor | y-cor
 start | end | weight
 
 # To run this project:
-1. Install SFML
+1. Install SFML:
+
 sudo apt-get install libsfml-dev
 
-2. Compile all .cpp file together
+2. Compile all .cpp file together:
+
 g++ -c main.cpp -o main.o
 
-3. Link all the compiled files with the used library ( this project uses 3 libraries )
+3. Link all the compiled files with the used library ( this project uses 3 libraries ):
+
 g++ main.o Graph.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 
-4. Run the executable file
+4. Run the executable file:
 
 --> g++ -c main.cpp -o main.o; g++ -c Graph.cpp -o Graph.o; g++ main.o Graph.o -o sfml.app -lsfml-graphics -lsfml-window -lsfml-system;
 
