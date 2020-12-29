@@ -134,7 +134,7 @@ void Graph::setDrawTexts_e()
 		e_texts[i].setCharacterSize(18); // in pixels, not points!
 		e_texts[i].setFillColor(sf::Color::Red);
 		e_texts[i].setStyle(sf::Text::Bold);
-		e_texts[i].setPosition((de[2*i].position.x+de[2*i+1].position.x+7.f)/2, (de[2*i].position.y+de[2*i+1].position.y+7.f)/2);
+		e_texts[i].setPosition((de[2*i].position.x+de[2*i+1].position.x)/2, (de[2*i].position.y+de[2*i+1].position.y)/2);
 
 	}
 }
