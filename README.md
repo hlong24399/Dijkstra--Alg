@@ -6,13 +6,13 @@
   2.Add new edge(s).                                                                                                                       
   3.Run Dijkstra Algorithm from the selected source to selected destination.
 
-# cor.txt format:
+# Cor.txt format:
 index | x-cor | y-cor
 
-# edge.txt format:
+# Edge.txt format:
 start | end | weight
 
-#To run this project:
+# To run this project:
 1. Install SFML
 sudo apt-get install libsfml-dev
 
