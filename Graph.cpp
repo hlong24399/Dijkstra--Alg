@@ -6,7 +6,7 @@
 //  Copyright © 2019 Hoang Nguyen. All rights reserved.
 //
 
-#include "Graph.hpp"
+#include "Graph.h"
 
 //Set the termination condition for the program to be false.
 bool Graph::sentinel = false;
@@ -19,14 +19,8 @@ Graph::Graph() {
 	//getline(cin,name);
 	//in.open(name);
 	in.open("cor.txt");
-	while (1) {
-		if (in.fail()) {
-			cout << " Failed to open file " << endl;
-			cout << " Enter the name again : ";
-			cin.clear();
-			getline(cin, name);
-		}
-		else break;
+	if (in.fail()) {
+		cout << " Failed to open file " << endl;
 	}
 	cout << endl;
 	//Set up vertices
@@ -56,26 +50,20 @@ Edge Graph::addEdge(int weight, pair<Vertex, Vertex> n_edge)
 void Graph::setEdge()
 {
 	//This part needs to be updated if we update the Vertices List from the file//
-	edges.push_back(addEdge(3, make_pair(vertices[0], vertices[1])));
-	edges.push_back(addEdge(1, make_pair(vertices[1], vertices[2])));
-	edges.push_back(addEdge(8, make_pair(vertices[1], vertices[5])));
-	edges.push_back(addEdge(5, make_pair(vertices[2], vertices[5])));
-	edges.push_back(addEdge(4, make_pair(vertices[0], vertices[4])));
-	edges.push_back(addEdge(3, make_pair(vertices[2], vertices[4])));
-	edges.push_back(addEdge(2, make_pair(vertices[4], vertices[5])));
-	edges.push_back(addEdge(7, make_pair(vertices[0], vertices[3])));
-	edges.push_back(addEdge(1, make_pair(vertices[1], vertices[3])));
-	edges.push_back(addEdge(9, make_pair(vertices[3], vertices[4])));
-	edges.push_back(addEdge(7, make_pair(vertices[5], vertices[6])));
-	edges.push_back(addEdge(9, make_pair(vertices[5], vertices[7])));
-	edges.push_back(addEdge(7, make_pair(vertices[2], vertices[1])));
-	edges.push_back(addEdge(2, make_pair(vertices[4], vertices[3])));
-	edges.push_back(addEdge(13, make_pair(vertices[1], vertices[6])));
-	edges.push_back(addEdge(8, make_pair(vertices[8], vertices[1])));
-	edges.push_back(addEdge(3, make_pair(vertices[6], vertices[2])));
-	edges.push_back(addEdge(6, make_pair(vertices[7], vertices[3])));
-	edges.push_back(addEdge(9, make_pair(vertices[8], vertices[7])));
+	ifstream in;
+	in.open("edge.txt");
+	if (in.fail()) {
+		cout << " Failed to open file " << endl;
+	}
+	cout << endl;
+	int temp_weight;
+	int temp_start;
+	int temp_end;
+	while (!in.eof() && in >> temp_start >> temp_end >> temp_weight) {
+		edges.push_back(addEdge(temp_weight, make_pair(vertices[temp_start], vertices[temp_end])));
 
+	}
+	cout << endl;
 	e_amounts = edges.size();
 }
 

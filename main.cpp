@@ -2,7 +2,7 @@
 #include<string>
 #include<SFML/Graphics.hpp>
 #include<vector>
-#include"Graph.hpp"
+#include"Graph.h"
 using namespace std;
 
 
