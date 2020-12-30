@@ -39,3 +39,4 @@ To change the graph, run:
 Then:
 ```./sfml-app```
 
+In case the script above does not give you a good randomization for visualization, get the one from the cor_edge_sameple.txt
