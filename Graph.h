@@ -14,6 +14,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include <algorithm>
+#include <string>
 using namespace std;
 
 

@@ -4,8 +4,7 @@
 # This program will be able to do 3 things:
   1.Add new vertex/vertices.                                                                                                               
   2.Add new edge(s).                                                                                                                       
-  3.Run Dijkstra Algorithm from the selected source to selected destination.
-
+  3.Run Dijkstra Algorithm from the selected source to selected destination.()
 # Cor.txt format:
 ```index | x-cor | y-cor```
 
@@ -31,3 +30,12 @@
 5. The executable file:
 
 ```./sfml-app```
+# Extra:
+
+In order to make it more interesting, I added random_gen.py script to generate different random vertices and weighted edgesto test out the Dijkstra Algorithm in multiple samples.
+
+To change the graph, run:
+```python3 random_gen.py```
+Then:
+```./sfml-app```
+

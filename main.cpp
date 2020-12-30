@@ -11,7 +11,7 @@ int main() {
 
 	sf::ContextSettings sets;
 	sets.antialiasingLevel = 8;
-	sf::RenderWindow win(sf::VideoMode(1500, 1150), "Graph", sf::Style::Default, sets);
+	sf::RenderWindow win(sf::VideoMode(1200,1000), "Graph", sf::Style::Default, sets);
 	win.setPosition(sf::Vector2i(100, 100));
 	win.setFramerateLimit(60);
 	Graph g;

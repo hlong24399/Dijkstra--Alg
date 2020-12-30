@@ -17,7 +17,6 @@ Graph::Graph() {
 
 	ifstream in;
 	string name;
-	cout << " Enter file name: ";
 	in.open("cor.txt");
 	if (in.fail()) {
 		cout << " Failed to open file " << endl;
@@ -96,7 +95,7 @@ void Graph::setDrawVertices()
 	for (int i = 0; i < v_amounts; i++) {
 		d_vertices[i].setPosition(vertices[i].cor_x, vertices[i].cor_y);
 		d_vertices[i].setFillColor(sf::Color::Black);
-		d_vertices[i].setRadius(7);
+		d_vertices[i].setRadius(5);
 	}
 
 }
@@ -107,8 +106,7 @@ void Graph::setDrawTexts_v()
 	v_texts.resize(v_amounts);
 	for ( int i = 0; i < v_amounts; i++ ) {
 
-		char c = vertices[i].order + '0';
-		cout << c;
+		string c = to_string(vertices[i].order);
 		v_texts[i].setFont(font);
 		v_texts[i].setString(c);
 		v_texts[i].setCharacterSize(24); // in pixels, not points!
@@ -125,13 +123,11 @@ void Graph::setDrawTexts_e()
 	e_texts.resize(e_amounts);
 	for ( int i = 0; i < e_amounts; i++)
 	{
-		// de[2 * i].position
-		// de[2 * i + 1].position
 
 		e_texts[i].setFont(font);
-		char c = edges[i].w + '0';
+		string c = to_string(edges[i].w);
 		e_texts[i].setString(c);
-		e_texts[i].setCharacterSize(18); // in pixels, not points!
+		e_texts[i].setCharacterSize(18);
 		e_texts[i].setFillColor(sf::Color::Red);
 		e_texts[i].setStyle(sf::Text::Bold);
 		e_texts[i].setPosition((de[2*i].position.x+de[2*i+1].position.x)/2, (de[2*i].position.y+de[2*i+1].position.y)/2);
@@ -162,9 +158,6 @@ void Graph::setMatrix()
 		matrix[edges[a].e.second.order].row[edges[a].e.first.order] = edges[a].w;
 	}
 
-	//To check the matrix by exporting it to a file ( in same folder with the main.cpp )
-	/*ofstream out;
-	out.open("Matrix.txt");*/
 
 	/*Since the uninitialized matrix element will have a random gabbage number from buffer, which is always negative or very big.
 	thus we need to initialize them as 0*/
@@ -249,15 +242,16 @@ void Graph::ShortestPath(int s, int e) //s is starting vertex. (s = 0)
 
 	//If there is no edge connecting between the 2 vertices, it's distance will remain INF, which is less than 0
 	if (d[e].dist < 0 || d[e].dist > 10000) {
-		cout << " There is no way to connect these two. ";
+		cout << " No available path to connect them!";
 		return;
 	}
-	cout << " Path from vertex " << s << " to vertex " << e << " has minimum cost of " <<
-		d[e].dist << " Has the minimum route is ";
+	cout << "Routing.... " << endl;
+	cout << "Minimum weight:" << d[e].dist << endl;
+	cout << "Minimum route: ";
 
 	print_route(pre_v, e);	//Set up vector Graph::path<int>
 	reverse(path.begin(), path.end());	//After loading up the vector<int>path, it will be reversed, thus we have to reverse it back.
-	for (auto i : path) cout << i << "......";
+	for (auto i : path) cout << i << "-----";
 	cout << endl;
 	DrawselectedPath(path);
 }
@@ -284,15 +278,17 @@ vector<sf::CircleShape> Graph::getDrawVertices()
 void Graph::options_list()
 {
 	cout << " \n\n\n";
-	cout << "Press\n";
-	cout << "1 is add a vertex.";
-	cout << "\n2 is add an edge.";
-	cout << "\n3 is run Dijsktra to find shortest path from source to end vertex.";
-	cout << "\n4 to end this thing.";
-	cout << "\nYou choice : ";
+	cout << "Press:\n";
+	cout << "1 to add a vertex.";
+	cout << "\n2 to add an edge.";
+	cout << "\n3 to run Dijsktra to find shortest path from source to end vertex.";
+	cout << "\n4 to end this program.";
+	cout << "\nYou choice: ";
 	int c;
 	cin >> c;
 	while ( c <  1 || c > 4) {
+		cin.ignore();
+		cin.clear();
 		cout << " That's not one of those options, please try again :";
 		cin >> c;
 	}
@@ -311,7 +307,7 @@ void Graph::options_list()
 	//Run Dijkstra
 	case 3:
 		int a, b;
-		cout << " Enter start and end vertex order: ";
+		cout << "Select a and b for the route a->b (2 integers separated by white space): ";
 		cin >> a >> b;
 		ShortestPath(a, b);
 		break;
@@ -327,10 +323,9 @@ void Graph::newVertex()
 {
 	//Add the new vertex into vector<Vertex>vertices and also add the new sf::CircleShape to draw.
 	Vertex temp;
-	cout << " The current newest vertex has order " << vertices.size()-1 << endl;
-	cout << " Enter your vertices info by this order:\n ";
-	cout << " (order)  (x coordinate)  (y coordinate) ";
-	cin >> temp.order >> temp.cor_x >> temp.cor_y;
+	cout << " Enter your vertices ((x coordinate)  (y coordinate)) :\n ";
+	cin >> temp.cor_x >> temp.cor_y;
+	temp.order = vertices.size()-1	;
 	vertices.push_back(temp);
 
 	//Update value of v_amount since it's added one more now.
@@ -362,6 +357,4 @@ void Graph::newEdge()
 	de.append(v1);
 	de.append(v2);
 	setMatrix(); //rebuild the matrix since the edge structure has changed.
-
-
 }
