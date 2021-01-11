@@ -1,6 +1,6 @@
 # Dijkstra-s-Alg - Build.For.Fun
 
-This program will help to visualize Dijsktra's algorithm ( graphic is done by SFML).
+This app will help to visualize Dijsktra's algorithm ( graphic is done by SFML).
 
 # How to use
 
@@ -34,10 +34,10 @@ This program will help to visualize Dijsktra's algorithm ( graphic is done by SF
 
 In order to make it more interesting, I added random_gen.py script to generate different random vertices and weighted edges to further test out the Dijkstra Algorithm in multiple scenarios.
 
-*To change the graph, run:
+* To change the graph, run:
 ```python3 random_gen.py```
 
-*Then:
+* Then run the app again:
 ```./sfml-app```
 
 ## Note:
