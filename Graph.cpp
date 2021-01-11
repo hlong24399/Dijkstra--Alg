@@ -279,39 +279,26 @@ void Graph::options_list()
 {
 	cout << " \n\n\n";
 	cout << "Press:\n";
-	cout << "1 to add a vertex.";
-	cout << "\n2 to add an edge.";
-	cout << "\n3 to run Dijsktra to find shortest path from source to end vertex.";
-	cout << "\n4 to end this program.";
+	cout << "\n1 to run Dijsktra to find shortest path from source to end vertex.";
+	cout << "\n2 to end this program.";
 	cout << "\nYou choice: ";
 	int c;
 	cin >> c;
-	while ( c <  1 || c > 4) {
+	while ( c <  1 || c > 2) {
 		cin.ignore();
 		cin.clear();
 		cout << " That's not one of those options, please try again :";
 		cin >> c;
 	}
 	switch (c) {
-
-	//Add new vertex
-	case 1:
-		newVertex();
-		break;
-
-	//Add new edge
-	case 2:
-		newEdge();
-		break;
-
 	//Run Dijkstra
-	case 3:
+	case 1:
 		int a, b;
 		cout << "Select a and b for the route a->b (2 integers separated by white space): ";
 		cin >> a >> b;
 		ShortestPath(a, b);
 		break;
-	case 4:
+	case 2:
 		sentinel = true;  //Terminate if this one is true.
 		break;
 	default:

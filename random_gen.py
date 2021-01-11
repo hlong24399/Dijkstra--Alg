@@ -1,7 +1,7 @@
 from numpy import random as r
 
-NUMBER_OF_COR = 20
-NUMBER_OF_EDGE = 70
+NUMBER_OF_COR = 10
+NUMBER_OF_EDGE = 25
 '''
 Using numpy.random to generate random vertices and edges as needed
 
