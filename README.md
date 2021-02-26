@@ -44,7 +44,7 @@ In order to make it more interesting, I added random_gen.py script to generate d
 * You might need to run it multiple times if the script does not give you a good randomized set for visualization.
 * In case the script above does not give you a good randomization for visualization, get the one from the cor_edge_sameple.txt
 
-## Sample of how it works:
+## Demo:
 
 ![Screenshot](sample_graph_text.png)
 ![Screenshot](sample_graph.png)
