@@ -1,6 +1,6 @@
-# Dijkstra-s-Alg - Build.For.Fun
+# Dijkstra-s-Algorithm - Build.For.Fun
 
-This app will help to visualize Dijsktra's algorithm ( graphic is done by SFML).
+This app will help to visualize Dijsktra's algorithm.
 
 # How to use
 
@@ -9,7 +9,7 @@ This app will help to visualize Dijsktra's algorithm ( graphic is done by SFML).
 * `edge.txt` will control the weighted edges.
 
 
-## To run this project:
+## Execution:
 1. Install SFML:
 
 ```sudo apt-get install libsfml-dev```
@@ -32,17 +32,15 @@ This app will help to visualize Dijsktra's algorithm ( graphic is done by SFML).
 
 # Extra:
 
-In order to make it more interesting, I added random_gen.py script to generate different random vertices and weighted edges to further test out the Dijkstra Algorithm in multiple scenarios.
-
-* To change the graph, run:
+* To change the graph randomly, run:
 ```python3 random_gen.py```
 
-* Then run the app again:
+* Then run the app again to see the new graph:
 ```./sfml-app```
 
 ## Note:
-* You might need to run it multiple times if the script does not give you a good randomized set for visualization.
-* In case the script above does not give you a good randomization for visualization, get the one from the cor_edge_sameple.txt
+* You might need to run it multiple times if the script does not give you a good randomized set for visualization purpose.
+* cor_edge_sameple.txt is a test set if needed.
 
 ## Demo:
 
