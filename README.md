@@ -1,6 +1,6 @@
 # Dijkstra-s-Algorithm - Build.For.Fun
 
-This app will help to visualize Dijsktra's algorithm.
+This app will help to visualize Dijsktra's algorithm using C++ and SFML (Graphic Library).
 
 # How to use
 
